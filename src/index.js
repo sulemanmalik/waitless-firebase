@@ -5,42 +5,55 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { reduxFirestore, getFirestore } from "redux-firestore";
-import { ReactReduxFirebaseProvider, getFirebase, reactReduxFirebase } from "react-redux-firebase";
-import * as firebase from "firebase";
+import { reduxFirestore, getFirestore, createFirestoreInstance } from "redux-firestore";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
+import firebase from "firebase";
 import "firebase/firestore";
-import firebaseConfig from "./config/firebase";
 
-// react-redux-firebase config
-const rrfConfig = {
-  userProfile: 'users'
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-}
+const config = {
+  apiKey: "AIzaSyAxnNUY_8BzkaHOdNDNKdjjf6sqnDBjBdE",
+  authDomain: "waitless-fe542.firebaseapp.com",
+  databaseURL: "https://waitless-fe542.firebaseio.com",
+  projectId: "waitless-fe542",
+  storageBucket: "waitless-fe542.appspot.com",
+  messagingSenderId: "534915193684",
+  appId: "1:534915193684:web:97f514a83a1516a84406c1",
+  measurementId: "G-B262QCEK0D"
+};
 
-
-// firebase.initializeApp(firebaseConfig);
-firebase.firestore();
-
-
-
+firebase.initializeApp(config);
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(firebaseConfig)
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore }))
   )
-  // compose(
-  //   applyMiddleware(...middlewares),
-  //   reduxFirestore(firebase, firebaseConfig),
-  //   reactReduxFirebase(firebase)
-  // )
 );
+
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+};
 
 const rrfProps = {
   firebase,
-  config: firebaseConfig,
-  dispatch: store.dispatch
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance // <- needed if using firestore
 };
+
+// const store = createStore(
+//   rootReducer,
+//   compose(
+//     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+//     reduxFirestore(firebaseConfig)
+//   )
+// );
+
+// const rrfProps = {
+//   firebase,
+//   config: firebaseConfig,
+//   dispatch: store.dispatch
+// };
 
 ReactDOM.render(
   <Provider store={store}>

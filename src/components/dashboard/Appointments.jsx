@@ -1,7 +1,7 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
 import CreateAppointment from "./CreateAppointment";
 
 const Appointments = props => {
@@ -21,13 +21,14 @@ const Appointments = props => {
 };
 
 const mapStateToProps = state => {
-  console.log("State -- ", state);
+  console.log("State -- ", state.firestore.ordered);
   return {
-    appointments: state.appointment.appointments
+    appointments: state.appointments.appointments
   };
 };
 
 export default compose(
-  firestoreConnect(() => ['appointments']),
+  firebaseConnect(),
+  firestoreConnect(['appointments']),
   connect(mapStateToProps)
 )(Appointments);
