@@ -1,34 +1,44 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
+import { firestoreConnect, firebaseConnect, useFirestoreConnect } from "react-redux-firebase";
 import CreateAppointment from "./CreateAppointment";
+import { withFirebase } from 'react-redux-firebase'
+import firebase from 'firebase/app'
 
 const Appointments = props => {
-  console.log(props);
+  const { appointments } = props
   return (
     <React.Fragment>
+      <CreateAppointment />
       <ul>
-        {props.appointments.map(a => (
+        {appointments && appointments.map(a => (
           <li>
             {a.title} - {a.time}
           </li>
         ))}
       </ul>
-      <CreateAppointment />
     </React.Fragment>
   );
 };
 
 const mapStateToProps = state => {
-  console.log("State -- ", state.firestore.ordered);
   return {
-    appointments: state.appointments.appointments
+    appointments: state.firestore.ordered.appointments || state.appointments.appointments
   };
 };
 
+// export default function Appointments() {
+//   useFirestoreConnect([
+//     { collection: 'appointments' } // or 'todos'
+//   ])
+//   const appointments = useSelector(state => state.firestore.ordered.appointments)
+//  }
+
+// export default compose(firestoreConnect(['appointments']),connect(mapStateToProps))(Appointments) 
+
 export default compose(
-  firebaseConnect(),
-  firestoreConnect(['appointments']),
+  firebaseConnect(() => ['appointments']),
+  firestoreConnect(() => ['appointments']),
   connect(mapStateToProps)
 )(Appointments);

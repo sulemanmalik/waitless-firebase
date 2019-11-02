@@ -1,6 +1,7 @@
 export const createAppointment = appointment => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async calls
+
     const firestore = getFirestore();
     firestore
       .collection("appointments")
