@@ -1,10 +1,8 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firestoreConnect, firebaseConnect, useFirestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
 import CreateAppointment from "./CreateAppointment";
-import { withFirebase } from 'react-redux-firebase'
-import firebase from 'firebase/app'
 
 const Appointments = props => {
   const { appointments } = props
