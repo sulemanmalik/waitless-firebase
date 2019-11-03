@@ -1,10 +1,13 @@
 import React from "react";
 import Appointments from "./Appointments";
-import {Grid} from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
+import CreateAppointment from "./CreateAppointment";
 
 const Dashboard = () => {
   return (
-    <Grid xs={4} style={{maxHeight: '100%'}}>
+    <Grid xs={6} style={{ maxHeight: "100%" }}>
+      <CreateAppointment />
+      <Typography variant="h3">Upcoming Appointments</Typography>
       <Appointments />
     </Grid>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createAppointment } from "../../store/actions/appointmentActions";
+import { Typography } from '@material-ui/core'
 
 const CreateAppointment = props => {
   const [appointment] = useState({title: '', time: ''})
@@ -12,9 +13,11 @@ const CreateAppointment = props => {
   };
   return (
     <div>
-      <h1>Create appointment</h1>
-      <input onChange={e => appointment.title = e.target.value }></input>
-      <input onChange={e => appointment.time = e.target.value}></input>
+      <Typography variant="h3" gutterBottom>Create appointment</Typography>
+      <input onChange={e => appointment.title = e.target.value } placeholder="title"></input>
+      <input onChange={e => appointment.time = e.target.value} placeholder="time"></input>
+      <input onChange={e => appointment.doctor = e.target.value} placeholder="doctor"></input>
+      <input onChange={e => appointment.location = e.target.value} placeholder="location"></input>
       <button onClick={submitHandler}>Submit</button>
     </div>
   );

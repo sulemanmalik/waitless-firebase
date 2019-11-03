@@ -2,13 +2,17 @@ import React from "react";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
-import Home from './components/layout/Home'
-import Login from './components/auth/Login'
-import Signup from './components/auth/Signup'
-import Appointments from './components/dashboard/Appointments'
-import Dashboard from './components/dashboard/Dashboard'
+import Home from "./components/layout/Home";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+import Appointments from "./components/dashboard/Appointments";
+import Dashboard from "./components/dashboard/Dashboard";
+import firebase from "firebase";
+import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
+  const {auth} = props
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,11 +22,20 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/dashboard" component={Dashboard} />
+          {/* {!auth.uid && (<Redirect to="/dashboard"/>)} */}
+
+          {auth.uid && <Route path="/dashboard" component={Dashboard} />}
+
         </Switch>
       </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(App);

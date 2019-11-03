@@ -27,6 +27,7 @@ const config = {
   appId: "1:534915193684:web:97f514a83a1516a84406c1",
   measurementId: "G-B262QCEK0D"
 };
+const cors = require('cors')({origin: true});
 
 firebase.initializeApp(config);
 // firebase.firestore().settings({ timestampsInSnapshots: true })

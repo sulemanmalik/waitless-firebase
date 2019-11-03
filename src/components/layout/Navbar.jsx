@@ -35,7 +35,9 @@ const Navbar = props => {
       <AppBar className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Waitless
+            <Link href="/dashboard">
+                <Button color="inherit">Waitless</Button>
+              </Link>
           </Typography>
 
           {auth.isLoaded
