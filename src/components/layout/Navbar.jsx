@@ -53,9 +53,11 @@ const Navbar = props => {
                 <Button color="inherit">Login</Button>
               </Link>
 
-              <Button color="inherit" link>
-                Signup
-              </Button>
+              <Link href="/signup">
+                <Button color="inherit" link>
+                  Signup
+                </Button>
+              </Link>
             </div>
           )}
         </Toolbar>
