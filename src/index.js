@@ -10,7 +10,7 @@ import {
   createFirestoreInstance,
   reduxFirestore
 } from "redux-firestore";
-import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase, reactReduxFirebase } from "react-redux-firebase";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -44,7 +44,7 @@ const store = createStoreWithFirebase(
 
 const rrfConfig = {
   userProfile: "users",
-  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
 };
 
 const rrfProps = {
@@ -53,6 +53,7 @@ const rrfProps = {
   dispatch: store.dispatch,
   createFirestoreInstance // <- needed if using firestore
 };
+
 
 ReactDOM.render(
   <Provider store={store}>

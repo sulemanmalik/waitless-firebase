@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,6 +11,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {connect} from 'react-redux'
+import { signIn } from '../../store/actions/authActions'
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -42,8 +44,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = () => {
+
+
+
+const Login = props => {
   const classes = useStyles();
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const credentials = {
+    email: email,
+    password: password
+  }
+  
+  const handleSubmit = e => {
+    e.preventDefault()
+    console.log('clicked')
+    props.signIn(credentials)
+  }
+
+  const {authError} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -66,6 +87,7 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange = {e => credentials.email = e.target.value}
           />
           <TextField
             variant="outlined"
@@ -77,6 +99,8 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange = {e => credentials.password = e.target.value}
+
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -87,9 +111,16 @@ const Login = () => {
             fullWidth
             variant="contained"
             className={classes.submit}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
+
+          <div style={{color: 'red'}}>
+            {
+              authError ? <p>{authError}</p>: null
+            }
+            </div> 
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -108,4 +139,16 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -5,6 +5,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import { connect } from "react-redux";
+import { signOut } from "../../store/actions/authActions";
+import firebase from "firebase";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,8 +25,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Navbar = () => {
+const Navbar = props => {
   const classes = useStyles();
+  const { auth } = props;
+  const user = firebase.auth().currentUser;
 
   return (
     <div className={classes.root}>
@@ -33,17 +38,44 @@ const Navbar = () => {
             Waitless
           </Typography>
 
-          <Link href="/login">
-            <Button color="inherit">Login</Button>
-          </Link>
+          {auth.isLoaded
+            ? console.log("user", firebase.auth().currentUser)
+            : console.log("not logged")}
+          {user ? (
+            <Link onClick={props.signOut}>
+              <Button color="inherit">LogOut</Button>
+            </Link>
+          ) : (
+            <div>
+              <Link href="/login">
+                <Button color="inherit">Login</Button>
+              </Link>
 
-          <Button color="inherit" link>
-            Signup
-          </Button>
+              <Button color="inherit" link>
+                Signup
+              </Button>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-export default Navbar;
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  };
+};
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);

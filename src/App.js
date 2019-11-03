@@ -6,6 +6,7 @@ import Home from './components/layout/Home'
 import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import Appointments from './components/dashboard/Appointments'
+import Dashboard from './components/dashboard/Dashboard'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/appointments" component={Appointments} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     </div>
