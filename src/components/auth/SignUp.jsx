@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
@@ -15,168 +15,139 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {red} from "@material-ui/core/colors";
 
-// const useStyles = makeStyles(theme => ({
-//     "@global": {
-//         body: {
-//             backgroundColor: theme.palette.common.white
-//         }
-//     },
-//     paper: {
-//         marginTop: "18vh",
-//         display: "flex",
-//         flexDirection: "column",
-//         alignItems: "center"
-//     },
-//     avatar: {
-//         margin: theme.spacing(1),
-//         backgroundColor: theme.palette.secondary.main
-//     },
-//     form: {
-//         width: "100%",
-//         marginTop: theme.spacing(1)
-//     },
-//     submit: {
-//         margin: theme.spacing(3, 0, 2),
-//         backgroundColor: "#27ae60",
-//         "&:hover": {
-//             backgroundColor: "#27ae60"
-//         },
-//         color: "white"
-//     }
-// }));
+const useStyles = makeStyles(theme => ({
+    "@global": {
+        body: {
+            backgroundColor: theme.palette.common.white
+        }
+    },
+    paper: {
+        marginTop: "18vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main
+    },
+    form: {
+        width: "100%",
+        marginTop: theme.spacing(1)
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+        backgroundColor: "#27ae60",
+        "&:hover": {
+            backgroundColor: "#27ae60"
+        },
+        color: "white"
+    },
+    error: {
+        color: "red",
+    }
+}));
 
-class SignUp extends Component {
-    state = {
+const SignUp = props => {
+    const classes = useStyles();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+
+    const state = {
         email: '',
         password: '',
         firstName: '',
         lastName: '',
     };
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    };
-    handleSubmit = (e) => {
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.signUp(this.state);
-        // this.state = newUser which we send to mapDispatchToProps
+        props.signUp(state);
+        // state = newUser which we send to mapDispatchToProps
     };
-    useStyles = makeStyles(theme => ({
-        "@global": {
-            body: {
-                backgroundColor: theme.palette.common.white
-            }
-        },
-        paper: {
-            marginTop: "18vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-        },
-        avatar: {
-            margin: theme.spacing(1),
-            backgroundColor: theme.palette.secondary.main
-        },
-        form: {
-            width: "100%",
-            marginTop: theme.spacing(1)
-        },
-        submit: {
-            margin: theme.spacing(3, 0, 2),
-            backgroundColor: "#27ae60",
-            "&:hover": {
-                backgroundColor: "#27ae60"
-            },
-            color: "white"
-        },
-        error: {
-            color: "red",
-        }
-    }));
+    const {auth, authError} = props;
+    if (auth.uid) return <Redirect to='/dashboard'/>
 
-    render() {
-        const {auth, authError} = this.props;
-        if (auth.uid) return <Redirect to='/dashboard'/>
-        return (
-            <Container component="main" maxWidth="xs">
-                <CssBaseline/>
-                <div className={this.useStyles.paper}>
-                    <Avatar className={this.useStyles.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <form className={this.useStyles.form} noValidate>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            onChange={this.handleChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={this.handleChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="firstName"
-                            label="First Name"
-                            type="firstName"
-                            id="firstName"
-                            onChange={this.handleChange}
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="lastName"
-                            label="Last Name"
-                            type="lastName"
-                            id="lastName"
-                            onChange={this.handleChange}
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            className={this.useStyles.submit}
-                            onClick={this.handleSubmit}
-                        >
-                            Sign Up
-                        </Button>
-                        <div className={this.useStyles.error} color="red">
-                            { authError ? <p>{authError}</p> : null }
-                        </div>
-                    </form>
-                </div>
-            </Container>
-
-        )
-    }
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline/>
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign Up
+                </Typography>
+                <form className={classes.form} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={e => state.email = e.target.value}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={e => state.password = e.target.value}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="firstName"
+                        label="First Name"
+                        type="firstName"
+                        id="firstName"
+                        onChange={e => state.firstName = e.target.value}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="lastName"
+                        label="Last Name"
+                        type="lastName"
+                        id="lastName"
+                        onChange={e => state.lastName = e.target.value}
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary"/>}
+                        label="Remember me"
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        className={classes.submit}
+                        onClick={handleSubmit}
+                    >
+                        Sign Up
+                    </Button>
+                    <div style={{color: 'red'}}>
+                        { authError ? <p>{authError}</p>: null }
+                    </div>
+                </form>
+            </div>
+        </Container>
+    )
 
 }
 

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/layout/Home";
 import Login from "./components/auth/Login";
-import SignUp from "./components/auth/SignUp";
+import SignUp from "./components/auth/SignUp.jsx";
 import Appointments from "./components/dashboard/Appointments";
 import Dashboard from "./components/dashboard/Dashboard";
 import firebase from "firebase";
