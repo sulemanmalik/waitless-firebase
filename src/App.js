@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/layout/Home";
 import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
+import SignUp from "./components/auth/SignUp";
 import Appointments from "./components/dashboard/Appointments";
 import Dashboard from "./components/dashboard/Dashboard";
 import firebase from "firebase";
@@ -21,7 +21,7 @@ function App(props) {
           <Redirect from="/" to="/home" exact />
           <Route path="/home" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route path="/signup" component={SignUp}/>
           {/* {!auth.uid && (<Redirect to="/dashboard"/>)} */}
 
           {auth.uid && <Route path="/dashboard" component={Dashboard} />}
