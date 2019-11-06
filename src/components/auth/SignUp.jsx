@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
@@ -13,7 +13,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {red} from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -50,11 +49,6 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = props => {
     const classes = useStyles();
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
 
     const state = {
         email: '',

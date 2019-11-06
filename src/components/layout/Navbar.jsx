@@ -27,9 +27,8 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = props => {
   const classes = useStyles();
-  const { auth } = props;
+  const { auth, profile } = props;
   const user = firebase.auth().currentUser;
-
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
@@ -38,6 +37,9 @@ const Navbar = props => {
             <Link href="/dashboard">
                 <Button color="inherit">Waitless</Button>
               </Link>
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            Welcome, {profile.firstName}!
           </Typography>
 
           {auth.isLoaded
@@ -75,7 +77,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 

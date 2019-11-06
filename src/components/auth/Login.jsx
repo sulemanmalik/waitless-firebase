@@ -44,14 +44,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
-
 const Login = props => {
   const classes = useStyles();
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email] = useState("")
+  const [password] = useState("")
 
   const credentials = {
     email: email,

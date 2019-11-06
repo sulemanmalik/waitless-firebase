@@ -10,7 +10,7 @@ import {
   createFirestoreInstance,
   reduxFirestore
 } from "redux-firestore";
-import { ReactReduxFirebaseProvider, getFirebase, reactReduxFirebase } from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -27,7 +27,7 @@ const config = {
   appId: "1:534915193684:web:97f514a83a1516a84406c1",
   measurementId: "G-B262QCEK0D"
 };
-const cors = require('cors')({origin: true});
+//const cors = require('cors')({origin: true});
 
 firebase.initializeApp(config);
 // firebase.firestore().settings({ timestampsInSnapshots: true })
@@ -39,7 +39,7 @@ const createStoreWithFirebase = compose(reduxFirestore(firebase))(createStore);
 const store = createStoreWithFirebase(
   rootReducer,
   compose(
-    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase }))
+    applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
   )
 );
 
