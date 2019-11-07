@@ -8,6 +8,7 @@ import Link from "@material-ui/core/Link";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
 import firebase from "firebase";
+import logo from "../../assets/waitless-logo.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,10 +18,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    color: "black",
+    fontWeight: "bold",
   },
   appBar: {
-    backgroundColor: "grey",
+    color: "black",
+    backgroundColor: '#00cec9',//'#09e0ce',
     position: "static"
   }
 }));
@@ -35,7 +39,8 @@ const Navbar = props => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link href="/dashboard">
-                <Button color="inherit">Waitless</Button>
+              <img src={logo} height="35" width="35"/>
+                <Button color="black">Waitless</Button>
               </Link>
           </Typography>
           <Typography variant="h6" className={classes.title}>
@@ -47,16 +52,16 @@ const Navbar = props => {
             : console.log("not logged")}
           {user ? (
             <Link onClick={props.signOut}>
-              <Button color="inherit">LogOut</Button>
+              <Button color="black">LogOut</Button>
             </Link>
           ) : (
             <div>
               <Link href="/login">
-                <Button color="inherit">Login</Button>
+                <Button color="black">Login</Button>
               </Link>
 
               <Link href="/signup">
-                <Button color="inherit" link>
+                <Button color="black" link>
                   Signup
                 </Button>
               </Link>
