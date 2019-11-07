@@ -13,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {connect} from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -62,6 +64,7 @@ const Login = props => {
     e.preventDefault()
     console.log('clicked')
     props.signIn(credentials)
+    props.history.push('/home')
   }
 
   const {authError} = props
@@ -116,6 +119,8 @@ const Login = props => {
             Sign In
           </Button>
 
+
+
           <div style={{color: 'red'}}>
             {
               authError ? <p>{authError}</p>: null
@@ -147,7 +152,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    
   }
 }
 
