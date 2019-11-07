@@ -20,11 +20,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     color: "black",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   appBar: {
     color: "black",
-    backgroundColor: '#00cec9',//'#09e0ce',
+    backgroundColor: "#00cec9", //'#09e0ce',
     position: "static"
   }
 }));
@@ -39,13 +39,15 @@ const Navbar = props => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link href="/dashboard">
-              <img src={logo} height="35" width="35"/>
-                <Button color="black">Waitless</Button>
-              </Link>
+              <img src={logo} height="35" width="35" />
+              <Button color="black">Waitless</Button>
+            </Link>
           </Typography>
-          <Typography variant="h6" className={classes.title}>
-            Welcome, {profile.firstName}!
-          </Typography>
+          {profile.firstName && (
+            <Typography variant="h6" className={classes.title}>
+              Welcome, {profile.firstName}!
+            </Typography>
+          )}
 
           {auth.isLoaded
             ? console.log("user", firebase.auth().currentUser)
