@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import {Redirect} from 'react-router-dom'
 
 export const signIn = credentials => {
   return (dispatch, getState) => {

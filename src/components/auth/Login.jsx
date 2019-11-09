@@ -61,7 +61,7 @@ const Login = props => {
     e.preventDefault()
     console.log('clicked')
     props.signIn(credentials)
-    props.history.push('/home')
+    props.history.push('/dashboard')
   }
 
   const {authError} = props

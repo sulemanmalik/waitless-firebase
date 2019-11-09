@@ -23,9 +23,12 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold"
   },
   appBar: {
-    color: "black",
-    backgroundColor: "#00cec9", //'#09e0ce',
-    position: "static"
+    color: "white",
+    backgroundColor: "transparent", //'#09e0ce',
+    position: "absolute",
+    boxShadow: "none",
+    marginTop: "20px",
+    padding: "20px"
   }
 }));
 
@@ -33,15 +36,21 @@ const Navbar = props => {
   const classes = useStyles();
   const { auth, profile } = props;
   const user = firebase.auth().currentUser;
+
+  const handleSignOut = e => {
+    e.preventDefault()
+    props.signOut()
+  }
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link href="/dashboard">
+            {/* <Link href="/dashboard">
               <img src={logo} height="35" width="35" />
               <Button color="black">Waitless</Button>
-            </Link>
+            </Link> */}
           </Typography>
           {profile.firstName && (
             <Typography variant="h6" className={classes.title}>
@@ -53,17 +62,17 @@ const Navbar = props => {
             ? console.log("user", firebase.auth().currentUser)
             : console.log("not logged")}
           {user ? (
-            <Link onClick={props.signOut}>
+            <Link onClick={handleSignOut}>
               <Button color="black">LogOut</Button>
             </Link>
           ) : (
             <div>
               <Link href="/login">
-                <Button color="black">Login</Button>
+                <Button style={{color:"white"}}>Login</Button>
               </Link>
 
               <Link href="/signup">
-                <Button color="black" link>
+                <Button style={{color:"white"}} link>
                   Signup
                 </Button>
               </Link>
