@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     "@global": {
@@ -55,6 +56,10 @@ const SignUp = props => {
         password: '',
         firstName: '',
         lastName: '',
+        dateOfBirth: '',
+        sex: '',
+        medicareNumber: '',
+        phoneNumber: '',
     };
 
     const handleSubmit = (e) => {
@@ -76,56 +81,99 @@ const SignUp = props => {
                     Sign Up
                 </Typography>
                 <form className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        onChange={e => state.email = e.target.value}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={e => state.password = e.target.value}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="firstName"
-                        label="First Name"
-                        type="firstName"
-                        id="firstName"
-                        onChange={e => state.firstName = e.target.value}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="lastName"
-                        label="Last Name"
-                        type="lastName"
-                        id="lastName"
-                        onChange={e => state.lastName = e.target.value}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                onChange={e => state.email = e.target.value}
+                            /></Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onChange={e => state.password = e.target.value}
+                            /></Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="firstName"
+                                label="First Name"
+                                type="firstName"
+                                id="firstName"
+                                onChange={e => state.firstName = e.target.value}
+                            /></Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="lastName"
+                                label="Last Name"
+                                type="lastName"
+                                id="lastName"
+                                onChange={e => state.lastName = e.target.value}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="dateOfBirth"
+                                label="Date of Birth (dd/mm/yyyy)"
+                                type="dateOfBirth"
+                                id="dateOfBirth"
+                                onChange={e => state.dateOfBirth = e.target.value}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="sex"
+                                label="Sex"
+                                type="sex"
+                                id="sex"
+                                onChange={e => state.sex = e.target.value}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="medicareNumber"
+                                label="Medicare Number"
+                                type="medicareNumber"
+                                id="medicareNumber"
+                                onChange={e => state.medicareNumber = e.target.value}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="phoneNumber"
+                                label="Phone Number"
+                                type="phoneNumber"
+                                id="phoneNumber"
+                                onChange={e => state.phoneNumber = e.target.value}
+                            />
+                        </Grid>
+                    </Grid>
                     <Button
                         type="submit"
                         fullWidth
