@@ -26,7 +26,6 @@ const LandingPage = () => {
             justify="center"
             direction="column"
             alignItems="center"
-            justifyContent="space-between"
           >
             <Typography
               variant="h1"
@@ -37,10 +36,10 @@ const LandingPage = () => {
             </Typography>
 
             <Typography variant="h4" className="heading-primary">
-              <span className="heading-primary-sub">subtiltes</span>
+              <span className="heading-primary-sub">a modern solution to an age-old problem</span>
             </Typography>
 
-            <Button
+            {/* <Button
               className="button button-main"
               style={{
                 color: "grey",
@@ -51,7 +50,7 @@ const LandingPage = () => {
               }}
             >
               get started
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
       </header>

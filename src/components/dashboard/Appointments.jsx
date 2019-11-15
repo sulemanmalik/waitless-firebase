@@ -27,7 +27,6 @@ const useStyles = makeStyles({
     },
     display: "flex",
     direction: "column",
-    justifyContent: "center"
   },
   bullet: {
     display: "inline-block",
@@ -70,10 +69,10 @@ const Appointments = props => {
               <Typography variant="h5" style={{padding:7}}>
                 {a.title}
               </Typography>
-              <Typography variant="h7" style={{color:'grey'}}>{a.doctor}</Typography>
+              <Typography variant="h6" style={{color:'grey'}}>{a.doctor}</Typography>
 
                 <Divider style={{width: 300}}/>
-              <Typography variant="h7" style={{color:"grey"}}>{a.location}</Typography>
+              <Typography variant="h6" style={{color:"grey"}}>{a.location}</Typography>
               <Typography variant="h6">{a.time}</Typography>
             </Grid>
           </Card>
@@ -94,3 +93,15 @@ export default compose(
   firestoreConnect(() => ["appointments"]),
   connect(mapStateToProps)
 )(Appointments);
+
+// export default compose(
+//   firebaseConnect(() => ["appointments"]),
+//   firestoreConnect(props => [
+//     {
+//       collection: 'appointments',
+//       where: [['user.uid', '==', props.auth.uid]],
+//     }
+
+//   ]),
+//   connect(mapStateToProps)
+// )(Appointments);

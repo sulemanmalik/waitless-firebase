@@ -16,6 +16,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import "firebase/firestore";
+import "firebase/functions"
 
 const config = {
   apiKey: "AIzaSyAxnNUY_8BzkaHOdNDNKdjjf6sqnDBjBdE",
@@ -33,6 +34,7 @@ firebase.initializeApp(config);
 // firebase.firestore().settings({ timestampsInSnapshots: true })
 
 firebase.firestore();
+const functions = firebase.functions();
 
 const createStoreWithFirebase = compose(reduxFirestore(firebase))(createStore);
 
@@ -64,3 +66,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
+export default functions

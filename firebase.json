@@ -9,9 +9,23 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [ {
-      "source": "**",
-      "destination": "/index.html"
-    } ]
+    "rewrites": [
+      {
+        "source": "/functions",
+        "function": "addAdminRole"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "proxy": {
+      "/__": {
+        "target": "http://localhost:3000"
+      },
+      "/functions": {
+        "target": "http://localhost:3000"
+      }
+    }
   }
 }

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    color: "black",
+
     fontWeight: "bold"
   },
   appBar: {
@@ -63,7 +63,7 @@ const Navbar = props => {
             : console.log("not logged")}
           {user ? (
             <Link onClick={handleSignOut}>
-              <Button color="black">LogOut</Button>
+              <Button>LogOut</Button>
             </Link>
           ) : (
             <div>
