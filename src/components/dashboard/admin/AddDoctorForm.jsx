@@ -12,7 +12,7 @@ import { createDoctor } from "../../../store/actions/doctorActions";
 
 const FormDialog = props => {
   const [open, setOpen] = React.useState(false);
-  const [doctor, setDoctor] = React.useState({
+  const [doctor] = React.useState({
     doctorName: "",
     specialty: "",
     doctorId: "",
@@ -23,8 +23,24 @@ const FormDialog = props => {
     setOpen(true);
   };
 
-  const  handleClose =  async (event) => {
-    await submitHandler(event)
+  // const  handleClose =  async (event) => {
+  //   await submitHandler(event)
+  //   setOpen(false);
+  // };
+
+  const  handleConfirm =  async (event) => {
+    if(doctor.doctorName!=="" && doctor.specialty!==""
+        && doctor.doctorId!=="" && doctor.operatingClinic!==""){
+      await submitHandler(event);
+      setOpen(false);
+    }
+    else{
+      const error = "Add Doctor Error: cannot have an empty field";
+      console.log(error);
+    }
+  };
+
+  const handleCancel = async () => {
     setOpen(false);
   };
 
@@ -40,13 +56,13 @@ const FormDialog = props => {
       </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCancel}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Add Doctor</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To add a new doctor to the database, enter the followng information:
+            To add a new doctor to the database, enter the following information:
           </DialogContentText>
           <TextField
             autoFocus
@@ -89,10 +105,10 @@ const FormDialog = props => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCancel} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleConfirm} color="primary">
             Add
           </Button>
         </DialogActions>
