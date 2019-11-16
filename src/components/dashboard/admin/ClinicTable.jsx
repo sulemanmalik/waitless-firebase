@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
+import indigo from '@material-ui/core/colors/indigo';
 
 const useStyles = makeStyles({
   root: {
@@ -16,8 +17,14 @@ const useStyles = makeStyles({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 1350,
+    minWidth: 750,
   },
+  header: {
+    background: indigo[100],
+  },
+  headerText: {
+    fontWeight: 'bold',
+  }
 });
 
 function createData(clinicName, numDoctors, clinicId) {
@@ -35,10 +42,10 @@ const ClinicTable = props => {
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Clinic name</TableCell>
-            <TableCell align="right">Doctors</TableCell>
-            <TableCell align="right">Clinic ID</TableCell>
+          <TableRow className={classes.header}>
+              <TableCell className={classes.headerText}>Clinic name</TableCell>
+              <TableCell className={classes.headerText} align="left">Doctors</TableCell>
+              <TableCell className={classes.headerText} align="right">Clinic ID</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -47,7 +54,7 @@ const ClinicTable = props => {
               <TableCell component="th" scope="row">
                 {clinic.clinicName}
               </TableCell>
-              <TableCell align="right">{clinic.numDoctors}</TableCell>
+              <TableCell align="left">{clinic.numDoctors}</TableCell>
               <TableCell align="right">{clinic.clinicId}</TableCell>
             </TableRow>
           ))}

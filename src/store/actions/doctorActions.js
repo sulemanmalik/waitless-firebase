@@ -16,4 +16,24 @@ export const createDoctor = doctor => {
         })
     };
   };
+
+export const deleteDoctor = doctor => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        //make async calls
+
+        const firestore = getFirestore();
+        firestore
+            .collection("doctors")
+            .doc(doctor.id)
+            .delete()
+            .then(() => {
+                //dispatch action
+                dispatch({ type: "DELETE_DOCTOR", doctor: doctor });
+            }).catch(err => {
+            dispatch({ type: 'DELETE_DOCTOR_ERR', err})
+        });
+
+
+    };
+};
   

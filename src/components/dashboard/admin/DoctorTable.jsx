@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
+import indigo from "@material-ui/core/colors/indigo";
 
 const useStyles = makeStyles({
   root: {
@@ -16,8 +17,14 @@ const useStyles = makeStyles({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 1350,
+    minWidth: 750,
   },
+  header: {
+    background: indigo[100],
+  },
+  headerText: {
+    fontWeight: 'bold',
+  }
 });
 
 function createData(doctorName, specialty, doctorId, operatingClinic) {
@@ -38,11 +45,11 @@ const DoctorTable = (props) => {
     <Paper className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Doctor name</TableCell>
-            <TableCell align="right">Specialty</TableCell>
-            <TableCell align="right">Doctor ID</TableCell>
-            <TableCell align="right">Operating clinic</TableCell>
+          <TableRow className={classes.header}>
+            <TableCell className={classes.headerText}>Doctor name</TableCell>
+            <TableCell className={classes.headerText} align="left">Specialty</TableCell>
+            <TableCell className={classes.headerText} align="left">Doctor ID</TableCell>
+            <TableCell className={classes.headerText} align="right">Operating clinic</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,8 +58,8 @@ const DoctorTable = (props) => {
               <TableCell component="th" scope="row">
                 {doc.doctorName}
               </TableCell>
-              <TableCell align="right">{doc.specialty}</TableCell>
-              <TableCell align="right">{doc.doctorId}</TableCell>
+              <TableCell align="left">{doc.specialty}</TableCell>
+              <TableCell align="left">{doc.doctorId}</TableCell>
               <TableCell align="right">{doc.operatingClinic}</TableCell>
             </TableRow>
           ))}

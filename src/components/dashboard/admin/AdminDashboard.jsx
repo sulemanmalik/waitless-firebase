@@ -4,20 +4,23 @@ import ClinicTable from "./ClinicTable"
 import DoctorTable from './DoctorTable'
 import AddDoctorForm from './AddDoctorForm'
 import AddClinicForm from './AddClinicForm'
+import DeleteClinicForm from './DeleteClinicForm'
+import DeleteDoctorForm from "./DeleteDoctorForm";
+
 const AdminDashboard = () => {
   return (
     <Grid direction="row">
         <h1>Managed Clinics</h1>
         <ClinicTable/>
         <br/>
-        <AddClinicForm/>
+        <AddClinicForm/><DeleteClinicForm/>
 
         <br/>
 
         <h1>Doctors</h1>
         <DoctorTable/>
         <br/>
-        <AddDoctorForm/>
+        <AddDoctorForm/><DeleteDoctorForm/>
 
 
     </Grid>

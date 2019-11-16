@@ -12,18 +12,27 @@ import { createClinic } from "../../../store/actions/clinicActions";
 
 const FormDialog = props => {
   const [open, setOpen] = React.useState(false);
-  const [clinic, setClinic] = React.useState({
+  const [clinic] = React.useState({
     clinicName: "",
     numDoctors: "",
     clinicId: ""
   });
-
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const  handleClose =  async (event) => {
-    await submitHandler(event)
+  const  handleConfirm =  async (event) => {
+    if(clinic.clinicName!=="" && clinic.clinicId!=="" && clinic.numDoctors!==""){
+      await submitHandler(event);
+      setOpen(false);
+    }
+    else{
+      const error = "Add Clinic Error: cannot have an empty field";
+      console.log(error);
+    }
+  };
+
+  const handleCancel = async () => {
     setOpen(false);
   };
 
@@ -39,13 +48,13 @@ const FormDialog = props => {
       </Button>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCancel}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Add Clinic</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To add a new clinic to the database, enter the followng information:
+            To add a new clinic to the database, enter the following information:
           </DialogContentText>
           <TextField
             autoFocus
@@ -78,10 +87,10 @@ const FormDialog = props => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCancel} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleConfirm} color="primary">
             Add
           </Button>
         </DialogActions>
