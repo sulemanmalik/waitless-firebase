@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect, firebaseConnect } from "react-redux-firebase";
-import indigo from "@material-ui/core/colors/indigo";
+import green from '@material-ui/core/colors/green';
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     minWidth: 750,
   },
   header: {
-    background: indigo[100],
+    background: green[300],
   },
   headerText: {
     fontWeight: 'bold',
